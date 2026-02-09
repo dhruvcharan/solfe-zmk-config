@@ -10,8 +10,6 @@
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/ext_power.h>
 
-#include <dt-bindings/zmk/pointing.h>
-
 #define BASE 0
 #define LOWER 1
 #define RAISE 2
@@ -25,18 +23,6 @@
         adjust_layer {
             if-layers = <LOWER RAISE>;
             then-layer = <ADJUST>;
-        };
-    };
-
-    /* Behaviors */
-    behaviors {
-        msc: mouse_scroll_control {
-            compatible = "zmk,behavior-input-two-axis";
-            #binding-cells = <1>;
-            x-input-code = <INPUT_REL_HWHEEL>;
-            y-input-code = <INPUT_REL_WHEEL>;
-            time-to-max-speed-ms = <300>;
-            acceleration-exponent = <1>;
         };
     };
 
@@ -65,16 +51,16 @@
         lower_layer {
             display-name = "lower";
 // ------------------------------------------------------------------------------------------------------------
-// | BACK  |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   | SCRL_U|
-// | GRAVE |     | UP  |      | RFRSH|      |                   | UNDO |  7    |  8    |  9   |   0   | SCRL_D|
+// | BACK  |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   | PGUP  |
+// | GRAVE |     | UP  |      | RFRSH|      |                   | UNDO |  7    |  8    |  9   |   0   | PGDN  |
 // | DEL   | LEFT| DOWN| RIGHT| FIND |  {   |                   |  }   |  4    |  5    |  6   |   =   |   \   |
-// |   [   | RFRSH| CUT| COPY | PASTE| SCRL_L|      |  |       | SCRL_R|  1    |  2    |  3   |   -   |   ]   |
+// |   [   | RFRSH| CUT| COPY | PASTE| HOME  |      |  |       | END   |  1    |  2    |  3   |   -   |   ]   |
 //               |     |      |      |      |        |  |       |      |       |       |      |
             bindings = <
-&kp K_BACK    &kp EXCL  &kp AT    &kp HASH  &kp DLLR      &kp PRCNT                 &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &msc SCRL_UP
-&kp GRAVE     &trans    &kp UP    &trans    &kp K_REFRESH &trans                    &kp K_UNDO &kp N7    &kp N8    &kp N9    &kp N0    &msc SCRL_DOWN
+&kp K_BACK    &kp EXCL  &kp AT    &kp HASH  &kp DLLR      &kp PRCNT                 &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp PG_UP
+&kp GRAVE     &trans    &kp UP    &trans    &kp K_REFRESH &trans                    &kp K_UNDO &kp N7    &kp N8    &kp N9    &kp N0    &kp PG_DN
 &kp DEL       &kp LEFT  &kp DOWN  &kp RIGHT &kp LC(F)     &kp LS(LBRC)              &kp LS(RBRC) &kp N4  &kp N5    &kp N6    &kp EQUAL &kp BSLH
-&kp LBKT      &kp K_REFRESH &kp K_CUT &kp K_COPY &kp K_PASTE &msc SCRL_LEFT &trans &trans &msc SCRL_RIGHT &kp N1 &kp N2 &kp N3 &kp MINUS &kp RBKT
+&kp LBKT      &kp K_REFRESH &kp K_CUT &kp K_COPY &kp K_PASTE &kp HOME &trans &trans &kp END &kp N1 &kp N2 &kp N3 &kp MINUS &kp RBKT
                         &trans    &trans    &trans        &trans        &trans &trans &trans   &trans    &trans    &trans
             >;
 
